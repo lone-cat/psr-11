@@ -24,7 +24,8 @@
   },
   "require": {
     "php": ">=7.4",
-    "psr/container": "*"
+    "psr/container": "*",
+    "ext-mbstring": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "*"
