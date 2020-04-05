@@ -9,6 +9,7 @@ use LoneCat\PSR11\ContainerTraits\AliasesTrait;
 use LoneCat\PSR11\ContainerTraits\ArrayAccessTrait;
 use LoneCat\PSR11\ContainerTraits\ConstructorTrait;
 use LoneCat\PSR11\ContainerTraits\SingletonTrait;
+use LoneCat\PSR11\Exceptions\NotFoundException;
 use Psr\Container\ContainerInterface;
 
 class Container
