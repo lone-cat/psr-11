@@ -62,25 +62,24 @@ class Container
 
     public function get($id)
     {
-        $id = $this->processId($id);
+        $lcase_id = $this->processId($id);
 
-        if (array_key_exists($id, $this->results))
-            return $this->results[$id];
+        if (array_key_exists($lcase_id, $this->results))
+            return $this->results[$lcase_id];
 
-        if (array_key_exists($id, $this->definitions)) {
-            $definition = $this->definitions[$id];
+        if (array_key_exists($lcase_id, $this->definitions)) {
+            $definition = $this->definitions[$lcase_id];
 
             if ($definition instanceof Closure) {
-                $this->results[$id] = $definition($this);
+                $this->results[$lcase_id] = $definition($this);
             }
             else {
-                $this->results[$id] = $definition;
+                $this->results[$lcase_id] = $definition;
             }
         }
         else {
-            $class_name = '\\' . $id;
-            if (!class_exists($class_name))
-                throw new NotFoundException('Unknown service "' . $class_name . '"');
+            if (!class_exists($id))
+                throw new NotFoundException('Unknown service "' . $id . '"');
             try {
                 $reflection = new ReflectionClass($id);
             }
@@ -125,15 +124,15 @@ class Container
                     }
                     */
                     else
-                        throw new NotFoundException('Unable to resolve "' . $parameter->getName() . '"" in service "' . $id . '"');
+                        throw new NotFoundException('Unable to resolve "' . $parameter->getName() . '"" in service "' . $lcase_id . '"');
 
                     $arguments[] = $argument;
                 }
             }
-            $this->results[$id] = $reflection->newInstanceArgs($arguments);
+            $this->results[$lcase_id] = $reflection->newInstanceArgs($arguments);
         }
 
-        return $this->results[$id];
+        return $this->results[$lcase_id];
     }
 
     public function offsetSet($offset, $value)
