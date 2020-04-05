@@ -16,7 +16,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "LoneCat\\Tests\\": "tests/"
+      "Tests\\": "tests/"
     }
   },
   "config": {

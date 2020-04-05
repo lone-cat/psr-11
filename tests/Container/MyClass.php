@@ -1,6 +1,6 @@
 <?php
 
-namespace LoneCat\Tests\Container;
+namespace Tests\Container;
 
 class MyClass
 {

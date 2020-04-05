@@ -1,25 +1,23 @@
 <?php
 
-namespace LoneCat\Tests\Container;
+namespace Tests\Container;
 
-use LoneCat\Tests\TestClass;
+use LoneCat\PSR11\Container\Container;
+use LoneCat\PSR11\Container\ContanerAwareInterface;
+use Tests\TestClass;
 use PHPUnit\Framework\TestCase;
 
 class ContainerTest extends TestCase
 {
     public function testConstructor(): void
     {
-        $class = mb_strtolower(MyClass::class);
-        $a = new $class;
-        self::assertEquals(1,1);
-        \var_dump(class_exists(MyClass::class));
-        exit;
-        $container = \LoneCat\PSR11\Container\Container::instance();
+        $container = Container::instance();
+        $container->setAlias('abc', MyClass::class);
         //$a = new MyClass();
-        $a = $container[MyClass::class];
+        $a = $container['abc'];
         self::assertTrue($a instanceof MyClass);
-        //$a = $container[TestClass::class];
-        //self::assertTrue($a instanceof TestClass);
+        $a = $container[TestClass::class];
+        self::assertTrue($a instanceof ContanerAwareInterface);
     }
 
 }

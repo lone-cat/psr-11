@@ -6,6 +6,7 @@ use ArrayAccess;
 use Closure;
 use Psr\Container\ContainerInterface;
 use ReflectionClass;
+use ReflectionException;
 use ReflectionMethod;
 use ReflectionType;
 
@@ -17,6 +18,7 @@ class Container
     protected static ?self $container = null;
     protected array $definitions = [];
     protected array $results = [];
+    protected array $aliases = [];
 
     protected function __construct()
     {
@@ -60,8 +62,22 @@ class Container
         return $this->get($offset);
     }
 
+    protected function aliasExists($id): bool {
+        $lcase_id = $this->processId($id);
+
+        return array_key_exists($lcase_id, $this->aliases);
+    }
+
+    protected function getAlias($id): string {
+        return $this->aliases[$this->processId($id)];
+    }
+
     public function get($id)
     {
+
+        if ($this->aliasExists($id))
+            $id = $this->getAlias($id);
+
         $lcase_id = $this->processId($id);
 
         if (array_key_exists($lcase_id, $this->results))
@@ -83,7 +99,7 @@ class Container
             try {
                 $reflection = new ReflectionClass($id);
             }
-            catch (\ReflectionException $e) {
+            catch (ReflectionException $e) {
                 throw new ContainerException($e->getMessage(), $e->getCode(), $e);
             }
             $arguments = [];
@@ -129,7 +145,9 @@ class Container
                     $arguments[] = $argument;
                 }
             }
-            $this->results[$lcase_id] = $reflection->newInstanceArgs($arguments);
+            $object = $reflection->newInstanceArgs($arguments);
+            if ($object instanceof ContanerAwareInterface) $object->setContainer($this);
+            $this->results[$lcase_id] = $object;
         }
 
         return $this->results[$lcase_id];
@@ -146,6 +164,10 @@ class Container
 
         $this->definitions[$id] = $value;
         unset ($this->results[$id]);
+    }
+
+    public function setAlias(string $from, string $to) {
+        $this->aliases[$this->processId($from)] = $to;
     }
 
     public function offsetUnset($offset)
