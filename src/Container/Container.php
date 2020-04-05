@@ -78,8 +78,9 @@ class Container
             }
         }
         else {
-            if (!class_exists($id))
-                throw new NotFoundException('Unknown service "' . $id . '"');
+            $class_name = '\\' . $id;
+            if (!class_exists($class_name))
+                throw new NotFoundException('Unknown service "' . $class_name . '"');
             try {
                 $reflection = new ReflectionClass($id);
             }
