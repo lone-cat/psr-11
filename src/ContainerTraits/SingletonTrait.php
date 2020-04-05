@@ -1,22 +1,16 @@
 <?php
 
-namespace LoneCat\PSR11;
+namespace LoneCat\PSR11\ContainerTraits;
 
 trait SingletonTrait
 {
     protected static ?self $instance = null;
 
-    protected function __construct()
-    {
-    }
+    protected function __construct() {}
 
-    protected function __clone()
-    {
-    }
+    protected function __clone() {}
 
-    protected function __wakeup()
-    {
-    }
+    protected function __wakeup() {}
 
     public static function instance(): self
     {

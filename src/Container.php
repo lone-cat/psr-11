@@ -4,6 +4,11 @@ namespace LoneCat\PSR11;
 
 use ArrayAccess;
 use Closure;
+use LoneCat\PSR11\ContainerAware\ContanerAwareInterface;
+use LoneCat\PSR11\ContainerTraits\AliasesTrait;
+use LoneCat\PSR11\ContainerTraits\ArrayAccessTrait;
+use LoneCat\PSR11\ContainerTraits\ConstructorTrait;
+use LoneCat\PSR11\ContainerTraits\SingletonTrait;
 use Psr\Container\ContainerInterface;
 
 class Container

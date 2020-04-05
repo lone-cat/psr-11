@@ -1,6 +1,6 @@
 <?php
 
-namespace LoneCat\PSR11;
+namespace LoneCat\PSR11\ContainerAware;
 
 use Psr\Container\ContainerInterface;
 

@@ -3,7 +3,7 @@
 namespace Tests;
 
 use LoneCat\PSR11\Container;
-use LoneCat\PSR11\ContanerAwareInterface;
+use LoneCat\PSR11\ContainerAware\ContanerAwareInterface;
 use PHPUnit\Framework\TestCase;
 
 class ContainerTest extends TestCase

@@ -2,8 +2,8 @@
 
 namespace Tests;
 
-use LoneCat\PSR11\ContainerAwareTrait;
-use LoneCat\PSR11\ContanerAwareInterface;
+use LoneCat\PSR11\ContainerAware\ContainerAwareTrait;
+use LoneCat\PSR11\ContainerAware\ContanerAwareInterface;
 
 class TestClass implements ContanerAwareInterface
 {
