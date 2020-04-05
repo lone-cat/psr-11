@@ -1,6 +1,6 @@
 <?php
 
-namespace LoneCat\PSR11\Container;
+namespace LoneCat\PSR11;
 
 use Exception;
 use Psr\Container\ContainerExceptionInterface;
