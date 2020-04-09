@@ -12,7 +12,6 @@ trait ConstructorTrait
     /**
      * @param string $class_name
      * @return object
-     * @throws NonConstructableObjectException
      */
     protected function constructObject(string $class_name): ?object {
         if (!class_exists($class_name)) {
