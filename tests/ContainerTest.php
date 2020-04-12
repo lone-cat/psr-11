@@ -68,6 +68,16 @@ class ContainerTest extends TestCase
         self::assertTrue($object instanceof MyImplementingClass);
     }
 
+    public function testAutowiringVeryComplex() {
+        $container = Container::instance();
+
+        $container->setAlias(MyInterface::class, MyImplementingClass::class);
+
+        $object = $container[MyClassWithInterfaceInConstructor::class];
+
+        self::assertTrue($object instanceof MyClassWithInterfaceInConstructor);
+    }
+
 
 
 
