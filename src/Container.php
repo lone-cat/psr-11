@@ -27,10 +27,12 @@ class Container
 
     public function has($id): bool
     {
+        $lcase_id = $this->processId($id);
         return
-            array_key_exists($this->processId($id), $this->results)
-            || array_key_exists($this->processId($id), $this->definitions)
-            || !is_null($this->constructObject($id));
+            array_key_exists($lcase_id, $this->results)
+            || array_key_exists($lcase_id, $this->definitions)
+            || array_key_exists($lcase_id, $this->aliases)
+            || class_exists($id);
     }
 
     public function get($id)

@@ -58,5 +58,17 @@ class ContainerTest extends TestCase
         self::assertTrue($object->getMyVar2() === ['alex']);
     }
 
+    public function testAutowiringAliases() {
+        $container = Container::instance();
+
+        $container->setAlias(MyInterface::class, MyImplementingClass::class);
+
+        $object = $container[MyInterface::class];
+
+        self::assertTrue($object instanceof MyImplementingClass);
+    }
+
+
+
 
 }
